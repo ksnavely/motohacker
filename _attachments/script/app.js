@@ -8,9 +8,10 @@ var MH = function () {
               if (!o[this.name].push) {
                   o[this.name] = [o[this.name]];
               }
-              o[this.name].push( $($.parseHTML(this.value)).html() || '');
+//              o[this.name].push( $($.parseHTML(this.value)).html() || '');
+              o[this.name].push( this.value || '');
           } else {
-              o[this.name] = ( $($.parseHTML(this.value)).html() || '');
+              o[this.name] = ( this.value || '');
           }
       });
       return o;
