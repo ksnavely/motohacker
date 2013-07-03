@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>MotoHacker</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Le styles -->
+    <link href="style/style.css" rel="stylesheet">
+    <link href="style/bootstrap.min.css" rel="stylesheet">
+    <link href="style/bootstrap-responsive.min.css" rel="stylesheet">
+
+    <!-- current post template -->
+    <script id="current-post-template" type="text/x-mustache" charset="utf-8">
+      <div id={{id}}>
+        <h1>{{title}}</h1>
+        <p class="lead">{{date}}</p>
+        <p class="lead">{{{text}}}</p>
+        <p class="lead">{{{tags}}}</p>
+      </div>
+    </script>
+
+    <!-- new post template -->
+    <script id="new-post-template" type="text/x-mustache" charset="utf-8">
+      <form id="new-post-form">
+      <p><input type="text" width=20 id="title" name="title" value="Title..." /></p>
+      <p><textarea id="text" class="new-post-textarea" name="text">Enter text...</textarea></p>
+      <p><input type="tags" width=20 id="title" name="tags" value="Tags..." /></p>
+    </form>
+      <p><button id="new-post-submit">Submit</button><button id="new-post-cancel">Cancel</button></p>
+    </script>
+
+    <!-- recent post template -->
+    <script id="recent-posts-template" type="text/x-mustache" charset="utf-8">
+      <ul>
+        {{#posts}}
+        <li id={{id}} class="recent-post">
+          <h4>{{title}}</h4>
+          <p>{{date}}</p>
+          <p>{{{text}}}</p>
+          <p>{{tags}}</p>
+        </li>
+        {{/posts}}
+      </ul>
+    </script>
+
+  <body>
+    <div id="account" class="pull-right"></div>
+    <div class="container-narrow">
+
+      <div class="masthead">
+        <ul class="nav nav-pills pull-right">
+          <li class="active"><a href="#">Home</a></li>
+          <li><a href="#">About</a></li>
+          <li><a href="#">Contact</a></li>
+          <li><a href="http://github.com/ksnavely">GitHub</a></li>
+        </ul>
+        <h3 class="muted">MotoHacker</h3>
+      </div>
+      <hr>
+      <div id="current-post-area" class="jumbotron"> </div>
+      <hr>
+      <div id="new-post-area"><a id="new-post-a" href="#">New Post</a></div>
+      <div id="recent-posts-area" class="row-fluid marketing"> </div>
+      <hr>
+      <div class="footer">
+        <p>&copy; Kyle Snavely 2013</p>
+      </div>
+
+    </div> <!-- /container -->
+
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="script/jquery-2.0.0.min.js"></script>
+    <script src="script/jquery.couch.js"></script>
+    <script src="script/underscore.js"></script>
+    <script src="vendor/couchapp/jquery.mustache.js"></script>
+    <script src="vendor/couchapp/jquery.couchLogin.js"></script>
+    <script src="vendor/couchapp/jquery.couchProfile.js"></script>
+    <script src="script/bootstrap.min.js"></script>
+    <script src="script/app.js"></script>
+    <script>
+      $(document).ready(function () {
+        window.mh = new MH()
+      });
+    </script>
+  </body>
+</html>
