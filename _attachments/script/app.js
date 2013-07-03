@@ -8,10 +8,11 @@ var MH = function () {
               if (!o[this.name].push) {
                   o[this.name] = [o[this.name]];
               }
-//              o[this.name].push( $($.parseHTML(this.value)).html() || '');
-              o[this.name].push( this.value || '');
+              // Remove the script tags from the text
+              o[this.name].push( this.value.replace(/<script[^>]*>.*?<\/script>/gi,'') || '' );
           } else {
-              o[this.name] = ( this.value || '');
+              // Remove the script tags from the text
+              o[this.name] = ( this.value.replace(/<script[^>]*>.*?<\/script>/gi,'') || '' );
           }
       });
       return o;
