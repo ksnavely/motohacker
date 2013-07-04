@@ -22,8 +22,9 @@ window.MH = function () {
   this.db = $.couch.db("motohacker")
 
   // Application singletons
-  this.recentPostsView = new MH.RecentPostsView({"el": $("#recent-posts-area")})
   this.mhRouter = new MH.MHRouter()
+  this.recentPostsView = new MH.RecentPostsView({"el": $("#recent-posts-area")})
+  this.currentPostView = new MH.CurrentPostView({"el": $("#current-post-area")})
   Backbone.history.start()
 }
 
@@ -31,50 +32,8 @@ MH.prototype.render = function () {
   // Events
   $("#new-post-a")[0].addEventListener("click", this.renderNewMessageArea)
   // Load posts
-  this.renderLastPost()
+  this.currentPostView.render()
   this.recentPostsView.render()
-}
-
-MH.prototype.renderPost = function (post_id) {
-  this.db.view("motohacker/listBlogPostsById", {
-    keys: [post_id],
-    success: function (data) {
-      if (data.rows.length == 0) {
-        alert("The blog post with _id: " + post_id + " could not be opened.")
-      }
-      data = { 
-        id: '"' + data.rows[0].value._id + '"',
-        date: data.rows[0].value.date,
-        title: data.rows[0].value.title,
-        text: data.rows[0].value.text,
-        tags: data.rows[0].value.tags,
-      };
-      var html = $.mustache($("#current-post-template").html(), data)
-      $("#current-post-area").html( html )
-      window.scrollTo(0,0)
-    },
-    error: function (status) {
-      alert("The blog post with _id: " + post_id + " could not be opened.")
-    }
-  });
-},
-
-MH.prototype.renderLastPost =  function () {
-  this.db.view("motohacker/listBlogPosts", {
-    limit: 1,
-    descending: true,
-    success: function (data) {
-      data = { 
-        id: '"' + data.rows[0].value._id + '"',
-        date: data.rows[0].value.date,
-        title: data.rows[0].value.title,
-        text: data.rows[0].value.text,
-        tags: data.rows[0].value.tags,
-      };
-      var html = $.mustache($("#current-post-template").html(), data)
-      $("#current-post-area").html( html )
-    },
-  });
 }
 
 MH.prototype.renderNewMessageArea = function () {
