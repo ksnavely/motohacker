@@ -23,6 +23,7 @@
 
     <!-- new post template -->
     <script id="new-post-template" type="text/x-mustache" charset="utf-8">
+      <hr>
       <form id="new-post-form">
       <p>Title: <input type="text" width=20 id="title" name="title" value="" /></p>
       <p>Text: <textarea id="text" class="new-post-textarea" name="text"></textarea></p>
@@ -36,9 +37,9 @@
       <ul>
         {{#posts}}
         <li>
-        <h4><a class="recent-post-title" href="{{url}}">{{title}}</a></h4>
+        <h4><a class="recent-post-title" href="#post/{{id}}">{{title}}</a></h4>
           <p>{{{text}}}</p>
-          <p class="muted">{{date}} {{tags}}</p>
+          <p class="muted">{{date}}</p><p class="muted"> {{tags}}</p>
         </li>
         {{/posts}}
       </ul>
@@ -58,13 +59,13 @@
             <li><a href="#">About</a></li>
             <li><a href="#">Contact</a></li>
             <li><a href="http://github.com/ksnavely">GitHub</a></li>
+            <li><a id="new-post-a" href="#">New Post</a></li>
           </ul>
           <h3 class="muted">MotoHacker</h3>
         </div>
+        <div id="new-post-area"></div>
         <hr>
         <div id="current-post-area" class="jumbotron"> </div>
-        <hr>
-        <div id="new-post-area"><a id="new-post-a" href="#">New Post</a></div>
         <hr>
         <div class="footer">
           <p>&copy; Kyle Snavely 2013</p>
@@ -88,10 +89,12 @@
     <script src="script/MHRouter.js"></script>
     <script src="script/Views/RecentPostsView.js"></script>
     <script src="script/Views/CurrentPostView.js"></script>
+    <script src="script/Models/Post.js"></script>
+    <script src="script/Collections/Posts.js"></script>
     <script>
       $(document).ready(function () {
         window.motohacker = new MH()
-        motohacker.render()
+        motohacker.init()
       });
     </script>
   </body>

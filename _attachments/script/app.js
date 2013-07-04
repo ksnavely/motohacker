@@ -23,23 +23,24 @@ window.MH = function () {
 
   // Application singletons
   this.mhRouter = new MH.MHRouter()
-  this.recentPostsView = new MH.RecentPostsView({"el": $("#recent-posts-area")})
+  this.posts = new MH.Posts()
+  this.recentPostsView = new MH.RecentPostsView({"el": $("#recent-posts-area"), "collection": this.posts})
   this.currentPostView = new MH.CurrentPostView({"el": $("#current-post-area")})
   Backbone.history.start()
 }
 
-MH.prototype.render = function () {
+MH.prototype.init = function () {
   // Events
   $("#new-post-a")[0].addEventListener("click", this.renderNewMessageArea)
   // Load posts
+  this.posts.getRecentPosts(10)
   this.currentPostView.render()
-  this.recentPostsView.render()
 }
 
 MH.prototype.renderNewMessageArea = function () {
   $("#new-post-area").html( $("#new-post-template").html() )
-  $("#new-post-submit")[0].addEventListener("click", mh.submitNewMessage)
-  $("#new-post-cancel")[0].addEventListener("click", location.reload)
+  $("#new-post-submit")[0].addEventListener("click", motohacker.submitNewMessage)
+  $("#new-post-cancel")[0].addEventListener("click", function () {$("#new-post-area").empty()})
 }
 
 MH.prototype.submitNewMessage = function () {
