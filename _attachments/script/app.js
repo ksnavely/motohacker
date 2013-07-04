@@ -23,6 +23,8 @@ window.MH = function () {
 
   // Application singletons
   this.recentPostsView = new MH.RecentPostsView({"el": $("#recent-posts-area")})
+  this.mhRouter = new MH.MHRouter()
+  Backbone.history.start()
 }
 
 MH.prototype.render = function () {

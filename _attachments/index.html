@@ -36,7 +36,7 @@
       <ul>
         {{#posts}}
         <li>
-          <h4><a id={{id}} class="recent-post-title">{{title}}</a></h4>
+        <h4><a class="recent-post-title" href="{{url}}">{{title}}</a></h4>
           <p>{{{text}}}</p>
           <p class="muted">{{date}} {{tags}}</p>
         </li>
@@ -85,6 +85,7 @@
     <script src="script/bootstrap.min.js"></script>
 
     <script src="script/app.js"></script>
+    <script src="script/MHRouter.js"></script>
     <script src="script/Views/RecentPostsView.js"></script>
     <script>
       $(document).ready(function () {

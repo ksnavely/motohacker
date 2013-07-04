@@ -8,7 +8,7 @@ MH.RecentPostsView = Backbone.View.extend({
         var posts = []
         _.each( data.rows, function (row) {
           var post = {
-            id: '"' + row.value._id + '"',
+            url: '#post/' + row.value._id,
             date: row.value.date,
             title: row.value.title,
             text: $( $.parseHTML( row.value.text ) ).text().substring(0,199) + "...",
@@ -18,9 +18,6 @@ MH.RecentPostsView = Backbone.View.extend({
         });
         var html = $.mustache($("#recent-posts-template").html(), {"posts":posts})
         $(that.el).html( html )
-        $(that.el).find(".recent-post-title").click( function (e) {
-          motohacker.renderPost( e.target.id )
-        })
       },
     });
   } // End render
