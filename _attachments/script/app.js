@@ -1,4 +1,4 @@
-var MH = function () {
+window.MH = function () {
   // friendly helper http://tinyurl.com/6aow6yn
   $.fn.serializeObject = function() {
       var o = {};
@@ -21,12 +21,16 @@ var MH = function () {
   // Check the rewrite.json for more info
   this.db = $.couch.db("motohacker")
 
+  // Application singletons
+  this.recentPostsView = new MH.RecentPostsView({"el": $("#recent-posts-area")})
+}
+
+MH.prototype.render = function () {
   // Events
   $("#new-post-a")[0].addEventListener("click", this.renderNewMessageArea)
-
   // Load posts
   this.renderLastPost()
-  this.renderRecentPosts()
+  this.recentPostsView.render()
 }
 
 MH.prototype.renderPost = function (post_id) {
@@ -71,31 +75,6 @@ MH.prototype.renderLastPost =  function () {
   });
 }
 
-MH.prototype.renderRecentPosts =  function () {
-  this.db.view("motohacker/listBlogPosts", {
-    limit: 10,
-    descending: true,
-    success: function (data) {
-      var posts = []
-      _.each( data.rows, function (row) {
-        var post = {
-          id: '"' + row.value._id + '"',
-          date: row.value.date,
-          title: row.value.title,
-          text: $( $.parseHTML( row.value.text ) ).text().substring(0,199) + "...",
-          tags: row.value.tags,
-        }
-        posts.push( post )
-      });
-      var html = $.mustache($("#recent-posts-template").html(), {"posts":posts})
-      $("#recent-posts-area").html( html )
-      $("#recent-posts-area .recent-post-title").click( function (e) {
-        mh.renderPost( e.target.id )
-      })
-    },
-  });
-}
-
 MH.prototype.renderNewMessageArea = function () {
   $("#new-post-area").html( $("#new-post-template").html() )
   $("#new-post-submit")[0].addEventListener("click", mh.submitNewMessage)
@@ -106,7 +85,7 @@ MH.prototype.submitNewMessage = function () {
   var post = $("#new-post-form").serializeObject()
   post.type = "blog_post"
   post.date = new Date()
-  mh.db.saveDoc( post, {
+  this.db.saveDoc( post, {
     success: function(response, textStatus, jqXHR){
           console.log(response);
           window.location.reload()

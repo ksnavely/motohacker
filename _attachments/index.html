@@ -78,14 +78,18 @@
     <script src="script/jquery-2.0.0.min.js"></script>
     <script src="script/jquery.couch.js"></script>
     <script src="script/underscore.js"></script>
+    <script src="script/backbone-min.js"></script>
     <script src="vendor/couchapp/jquery.mustache.js"></script>
     <script src="vendor/couchapp/jquery.couchLogin.js"></script>
     <script src="vendor/couchapp/jquery.couchProfile.js"></script>
     <script src="script/bootstrap.min.js"></script>
+
     <script src="script/app.js"></script>
+    <script src="script/Views/RecentPostsView.js"></script>
     <script>
       $(document).ready(function () {
-        window.mh = new MH()
+        window.motohacker = new MH()
+        motohacker.render()
       });
     </script>
   </body>
