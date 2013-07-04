@@ -15,10 +15,9 @@
     <!-- current post template -->
     <script id="current-post-template" type="text/x-mustache" charset="utf-8">
       <div id={{id}}>
-        <h1>{{title}}</h1>
-        <p class="lead">{{date}}</p>
+        <h2>{{title}}</h2>
         <p class="lead">{{{text}}}</p>
-        <p class="lead">{{{tags}}}</p>
+        <p class="muted">{{date}} {{{tags}}}</p>
       </div>
     </script>
 
@@ -36,39 +35,41 @@
     <script id="recent-posts-template" type="text/x-mustache" charset="utf-8">
       <ul>
         {{#posts}}
-        <li id={{id}} class="recent-post">
-          <h4>{{title}}</h4>
-          <p>{{date}}</p>
+        <li>
+          <h4><a id={{id}} class="recent-post-title">{{title}}</a></h4>
           <p>{{{text}}}</p>
-          <p>{{tags}}</p>
+          <p class="muted">{{date}} {{tags}}</p>
         </li>
         {{/posts}}
       </ul>
     </script>
 
   <body>
-    <div id="account" class="pull-right"></div>
     <div class="container-narrow">
-
-      <div class="masthead">
-        <ul class="nav nav-pills pull-right">
-          <li class="active"><a href="#">Home</a></li>
-          <li><a href="#">About</a></li>
-          <li><a href="#">Contact</a></li>
-          <li><a href="http://github.com/ksnavely">GitHub</a></li>
-        </ul>
-        <h3 class="muted">MotoHacker</h3>
-      </div>
-      <hr>
-      <div id="current-post-area" class="jumbotron"> </div>
-      <hr>
-      <div id="new-post-area"><a id="new-post-a" href="#">New Post</a></div>
-      <div id="recent-posts-area" class="row-fluid marketing"> </div>
-      <hr>
-      <div class="footer">
-        <p>&copy; Kyle Snavely 2013</p>
+      <div id="right-menu" class="pull-right">
+        <div id="account"></div>
+        <div id="recent-posts-area" class="marketing"> </div>
       </div>
 
+      <div id="left-content" class="pull-left">
+        <div class="masthead">
+          <ul class="nav nav-pills pull-right">
+            <li class="active"><a href="#">Home</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Contact</a></li>
+            <li><a href="http://github.com/ksnavely">GitHub</a></li>
+          </ul>
+          <h3 class="muted">MotoHacker</h3>
+        </div>
+        <hr>
+        <div id="current-post-area" class="jumbotron"> </div>
+        <hr>
+        <div id="new-post-area"><a id="new-post-a" href="#">New Post</a></div>
+        <hr>
+        <div class="footer">
+          <p>&copy; Kyle Snavely 2013</p>
+        </div>
+      </div> <!-- left menu -->
     </div> <!-- /container -->
 
     <!-- Le javascript

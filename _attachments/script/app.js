@@ -30,9 +30,12 @@ var MH = function () {
 }
 
 MH.prototype.renderPost = function (post_id) {
-  this.db.view("motohacker/listBlogPosts", {
+  this.db.view("motohacker/listBlogPostsById", {
     keys: [post_id],
     success: function (data) {
+      if (data.rows.length == 0) {
+        alert("The blog post with _id: " + post_id + " could not be opened.")
+      }
       data = { 
         id: '"' + data.rows[0].value._id + '"',
         date: data.rows[0].value.date,
@@ -42,7 +45,11 @@ MH.prototype.renderPost = function (post_id) {
       };
       var html = $.mustache($("#current-post-template").html(), data)
       $("#current-post-area").html( html )
+      window.scrollTo(0,0)
     },
+    error: function (status) {
+      alert("The blog post with _id: " + post_id + " could not be opened.")
+    }
   });
 },
 
@@ -82,8 +89,8 @@ MH.prototype.renderRecentPosts =  function () {
       });
       var html = $.mustache($("#recent-posts-template").html(), {"posts":posts})
       $("#recent-posts-area").html( html )
-      $("#recent-posts-area .recent-post").click( function (e) {
-        alert("clicked")
+      $("#recent-posts-area .recent-post-title").click( function (e) {
+        mh.renderPost( e.target.id )
       })
     },
   });

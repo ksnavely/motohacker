@@ -6,7 +6,8 @@ body {
 /* Custom container */
 .container-narrow {
   margin: 0 auto;
-  max-width: 800px;
+  max-width: 90%;
+  min-width: 1000px;
 }
 .container-narrow > hr {
   margin: 30px 0;
@@ -51,6 +52,19 @@ body {
   list-style-type: none
 }
 
+.recent-post-title {
+  color: #08c;
+}
+
 #account {
+  text-align: center;
   padding-right: 8px;
+}
+
+#left-content {
+  width: 70%;
+}
+
+#right-menu {
+  width: 30%;
 }
