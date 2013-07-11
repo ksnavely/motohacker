@@ -11,6 +11,7 @@
     <link href="style/style.css" rel="stylesheet">
     <link href="style/bootstrap.min.css" rel="stylesheet">
     <link href="style/bootstrap-responsive.min.css" rel="stylesheet">
+    <link href="style/jquery-ui-1.10.3.custom.css" rel="stylesheet">
 
     <!-- current post template -->
     <script id="current-post-template" type="text/x-mustache" charset="utf-8">
@@ -30,6 +31,15 @@
       <p>Tags: <input type="tags" width=20 id="title" name="tags" value="" /></p>
     </form>
       <p><button id="new-post-submit">Submit</button><button id="new-post-cancel">Cancel</button></p>
+    </script>
+
+    <!-- search template -->
+    <script id="search-template" type="text/x-mustache" charset="utf-8">
+      <hr>
+      <p><span>Start Date: <input type="text" class="date-textbox" id="start-date" /></span>
+       <span class="padding-left">End Date: <input type="text" class="date-textbox" id="end-date" /></span></p>
+      <p>      Text: <input type="text" id="text-terms" /></p>
+      <p><button id="search-submit">Submit</button><button id="search-cancel">Cancel</button></p>
     </script>
 
     <!-- recent post template -->
@@ -56,6 +66,7 @@
         <div class="masthead">
           <ul class="nav nav-pills pull-right">
             <li class="active"><a href="#">Home</a></li>
+            <li ><a id="search-link-a" href="#">Search</a></li>
             <li><a href="#">About</a></li>
             <li><a href="#">Contact</a></li>
             <li><a href="http://github.com/ksnavely">GitHub</a></li>
@@ -63,7 +74,7 @@
           </ul>
           <h3 class="muted">MotoHacker</h3>
         </div>
-        <div id="new-post-area"></div>
+        <div id="top-area"></div>
         <hr>
         <div id="current-post-area" class="jumbotron"> </div>
         <hr>
@@ -78,6 +89,7 @@
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="script/Libraries/jquery-2.0.0.min.js"></script>
     <script src="script/Libraries/jquery.couch.js"></script>
+    <script src="script/Libraries/jquery-ui-1.10.3.custom.js"></script>
     <script src="script/Libraries/underscore.js"></script>
     <script src="script/Libraries/backbone-min.js"></script>
     <script src="script/Libraries/jquery.mustache.js"></script>

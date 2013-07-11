@@ -32,22 +32,40 @@ window.MH = function () {
 MH.prototype.init = function () {
   // Events
   $("#new-post-a")[0].addEventListener("click", this.renderNewMessageArea)
+  $("#search-link-a")[0].addEventListener("click", this.renderSearchArea)
   // Load posts
   this.posts.getRecentPosts(10)
   this.currentPostView.render()
 }
 
+MH.prototype.renderSearchArea = function () {
+  $("#top-area").html( $("#search-template").html() )
+  $("#start-date").datepicker()
+  $("#end-date").datepicker()
+  $("#search-cancel")[0].addEventListener("click", function () {$("#top-area").empty()})
+  $("#search-submit")[0].addEventListener("click", function () {
+    // Setup the date range
+    var start_date = $("#start-date").val()
+    var end_date = $("#end-date").val()
+    start_date = (start_date === "") ? new Date( "01/01/2013" ) : new Date( start_date )
+    end_date = (end_date === "") ? new Date() : new Date( end_date )
+    motohacker.posts.searchForPosts( start_date.toISOString(), end_date.toISOString(), [] )
+  })
+}
+
 MH.prototype.renderNewMessageArea = function () {
-  $("#new-post-area").html( $("#new-post-template").html() )
+  $("#top-area").html( $("#new-post-template").html() )
   $("#new-post-submit")[0].addEventListener("click", motohacker.submitNewMessage)
-  $("#new-post-cancel")[0].addEventListener("click", function () {$("#new-post-area").empty()})
+  $("#new-post-cancel")[0].addEventListener("click", function () {$("#top-area").empty()})
 }
 
 MH.prototype.submitNewMessage = function () {
   var post = $("#new-post-form").serializeObject()
   post.type = "blog_post"
   post.date = new Date()
-  this.db.saveDoc( post, {
+  post.tags = post.tags.split(" ")
+  // Event context!!!
+  motohacker.db.saveDoc( post, {
     success: function(response, textStatus, jqXHR){
           console.log(response);
           window.location.reload()

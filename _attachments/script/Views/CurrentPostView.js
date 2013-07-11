@@ -11,15 +11,17 @@ MH.CurrentPostView = Backbone.View.extend({
         limit: 1,
         descending: true,
         success: function (data) {
-          data = { 
-            id: '"' + data.rows[0].value._id + '"',
-            date: data.rows[0].value.date,
-            title: data.rows[0].value.title,
-            text: data.rows[0].value.text,
-            tags: data.rows[0].value.tags,
-          };
-          var html = $.mustache($("#current-post-template").html(), data)
-          $(that.el).html( html )
+          if (data.rows.length > 0) {
+						data = { 
+							id: '"' + data.rows[0].value._id + '"',
+							date: data.rows[0].value.date,
+							title: data.rows[0].value.title,
+							text: data.rows[0].value.text,
+							tags: data.rows[0].value.tags,
+						};
+						var html = $.mustache($("#current-post-template").html(), data)
+						$(that.el).html( html )
+					}
         },
       });
     }

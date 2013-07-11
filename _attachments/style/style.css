@@ -3,6 +3,14 @@ body {
   padding-bottom: 40px;
 }
 
+.date-textbox {
+  width: 78px;
+}
+
+.padding-left {
+  padding-left: 8px;
+}
+
 /* Custom container */
 .container-narrow {
   margin: 0 auto;
@@ -40,7 +48,7 @@ body {
   width: 400px;
 }
 
-#new-post-area {
+#top-area {
   text-align: center;
 }
 

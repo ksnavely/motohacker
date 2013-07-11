@@ -40,4 +40,28 @@ MH.Posts = Backbone.Collection.extend({
       } //End success
     }) // End view
   }, // End getRecentPosts
+
+  searchForPosts: function (start_date, end_date, text) {
+    var that = this
+    var posts = []
+    motohacker.db.view("motohacker/listBlogPosts", {
+      descending: true,
+      startkey: start_date,
+      endkey: end_date,
+      success: function (data) {
+	that.reset()
+        _.each( data.rows, function (row) {
+          var post = new MH.Post ({
+            id: row.value._id,
+            date: row.value.date,
+            title: row.value.title,
+            text: row.value.text,
+            tags: row.value.tags,
+          })
+          posts.push( post )
+        })
+        that.add( posts )
+      } //End success
+    }) // End view
+  }
 })

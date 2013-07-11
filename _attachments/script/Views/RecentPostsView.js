@@ -3,6 +3,7 @@ MH.RecentPostsView = Backbone.View.extend({
   initialize: function (options) {
     this.collection.on("add", this.render, this)
     this.collection.on("remove", this.render, this)
+    this.collection.on("reset", this.render, this)
   },
 
   render: function () {
